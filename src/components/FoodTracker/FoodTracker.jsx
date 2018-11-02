@@ -18,19 +18,21 @@ class FoodTracker extends Component {
     }
 
     handleFoodAdd(foodItem) {
-        const foodItems = [...this.state.foods];
-        foodItems.push(foodItem);
-
-        this.setState({ foods: foodItems });
-
-        axios.post('https://localhost:5001/api/food', foodItems)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+        axios.post('https://localhost:5001/api/food', {
+            FoodItem: foodItem
+        })
+            .then(response => {
+                const foodItems = [...this.state.foods];
+                foodItems.push(foodItem);
+                this.setState({ foods: foodItems });
+            })
+            .catch(error => console.log("POST: ", error));
     }
 
     componentDidMount() {
         axios.get('https://localhost:5001/api/food')
-            .then(response => this.setState({ foods: response.data }));
+            .then(response => this.setState({ foods: response.data }))
+            .catch(error => console.log("GET: ", error));
     }
 
     render() {

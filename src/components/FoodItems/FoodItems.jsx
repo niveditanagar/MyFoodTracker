@@ -13,7 +13,7 @@ class FoodItems extends Component {
         return (
             <div>
                 <ul className="list-group">
-                    {this.props.foods && this.props.foods.map(x => <li className="list-group-item" key={x}>{x}</li>)}
+                    {this.props.foods && this.props.foods.map((x, index) => <li className="list-group-item" key={index}>{x}</li>)}
                 </ul>
             </div>
         );
